@@ -119,10 +119,11 @@ namespace Tripwires.LiveStream.Interface
         private void Dialog_FileOk(object sender, CancelEventArgs e)
         {
             ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName =  @""""+this.liveStreamerPath + "\\" + "Livestreamer.exe" + @"""";
-            startInfo.Arguments = string.Format("'{0}' source -o '{1}", (this.lstVods.SelectedItem as Vod).Url.Replace("http://www.",""), ((SaveFileDialog)sender).FileName);
+            startInfo.FileName =  "livestreamer";
+            startInfo.UseShellExecute = true;
+            startInfo.Arguments = string.Format(@"""{0}"" source -o ""{1}""", (this.lstVods.SelectedItem as Vod).Url.Replace("http://www.",""), ((SaveFileDialog)sender).FileName);
             // need to figure out the correct path needed
-            //Process x = Process.Start(startInfo);
+            Process x = Process.Start(startInfo);
         }
     }
 }
