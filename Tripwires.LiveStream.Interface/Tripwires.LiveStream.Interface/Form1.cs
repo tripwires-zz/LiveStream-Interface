@@ -9,13 +9,16 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Linq;
 using Tripwires.LiveStream.Interface.Lib;
+using System.Diagnostics;
 
 namespace Tripwires.LiveStream.Interface
 {
     public partial class frmMain : Form
     {
         private Vod[] vods;
+        private string liveStreamerPath;
         public frmMain()
         {
             InitializeComponent();
@@ -23,6 +26,29 @@ namespace Tripwires.LiveStream.Interface
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            string path = Environment.GetEnvironmentVariable("Path");
+            if (pathContainsLiveStreamer(path))
+            {
+                this.liveStreamerPath = this.GetLiveStreamerPath(path);
+            }
+            else
+            {
+                MessageBox.Show("Please Installa LiveStreamer before using this program. You might need to reinstall after the installation.", "LiveStreamer Missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool pathContainsLiveStreamer(string path)
+        {
+            string[] paths = path.Split(";".ToCharArray());
+            List<string> result = (from p in paths where p.Contains("Livestreamer") select p).ToList();
+            return result.Count > 0 && result.Count < 2;
+        }
+
+        private string GetLiveStreamerPath(string path)
+        {
+            string[] paths = path.Split(";".ToCharArray());
+            List<string> result = (from p in paths where p.Contains("Livestreamer") select p).ToList();
+            return result[0];
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
@@ -43,7 +69,7 @@ namespace Tripwires.LiveStream.Interface
             {
                 MessageBox.Show("The channelname must be filled in.");
             }
-            
+
         }
 
         private void loadListBox(Vod[] result)
@@ -76,7 +102,27 @@ namespace Tripwires.LiveStream.Interface
 
         private void btnDownload_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(((Vod)this.lstVods.SelectedItem).Url);
+            if (this.lstVods.SelectedItem != null)
+            {
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.Title = "Select the location where you want to save the file";
+                dialog.FileOk += Dialog_FileOk;
+                dialog.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please select a valid vod first");
+            }
+
+        }
+
+        private void Dialog_FileOk(object sender, CancelEventArgs e)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName =  @""""+this.liveStreamerPath + "\\" + "Livestreamer.exe" + @"""";
+            startInfo.Arguments = string.Format("'{0}' source -o '{1}", (this.lstVods.SelectedItem as Vod).Url.Replace("http://www.",""), ((SaveFileDialog)sender).FileName);
+            // need to figure out the correct path needed
+            //Process x = Process.Start(startInfo);
         }
     }
 }

@@ -294,7 +294,7 @@
     <value>2</value>
   </data>
   <data name="pcbThumbnail.Location" type="System.Drawing.Point, System.Drawing">
-    <value>598, 178</value>
+    <value>598, 288</value>
   </data>
   <data name="pcbThumbnail.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 132</value>
