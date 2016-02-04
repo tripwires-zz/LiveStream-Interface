@@ -20,6 +20,7 @@ namespace Tripwires.LiveStream.Interface.Lib
         #endregion
         private int total;
         private Vod[] videos;
+        private PageLink link;
 
         public Channel()
         {
@@ -54,6 +55,19 @@ namespace Tripwires.LiveStream.Interface.Lib
             set
             {
                 videos = value;
+            }
+        }
+        [JsonProperty("_links")]
+        public PageLink Link
+        {
+            get
+            {
+                return link;
+            }
+
+            set
+            {
+                link = value;
             }
         }
     }

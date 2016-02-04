@@ -55,6 +55,8 @@ namespace Tripwires.LiveStream.Interface.Lib
         private bool isMuted;
         private Uri preview;
         private Thumb[] thumbNails;
+        private Resolution resolution;
+
 
         [JsonProperty("title")]
         public string Title
@@ -82,7 +84,6 @@ namespace Tripwires.LiveStream.Interface.Lib
                 description = value;
             }
         }
-
         [JsonProperty("broadcast_id")]
         public string BroadcastId
         {
@@ -250,6 +251,19 @@ namespace Tripwires.LiveStream.Interface.Lib
             set
             {
                 url = value;
+            }
+        }
+        [JsonProperty("resolutions")]
+        public Resolution Resolution
+        {
+            get
+            {
+                return resolution;
+            }
+
+            set
+            {
+                resolution = value;
             }
         }
     }

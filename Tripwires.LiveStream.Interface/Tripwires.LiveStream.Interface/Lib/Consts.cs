@@ -7,14 +7,11 @@ using System.Threading.Tasks;
 
 namespace Tripwires.LiveStream.Interface.Lib
 {
-    public class Consts
+    enum VodType
     {
-        enum VodType
-        {
-            [Description("Hightlight")]
-            HIGHLIGHT,
-            [Description("Past Broadcast")]
-            PASTBROADCAST
-        }
+        [Description("Hightlight")]
+        HIGHLIGHT,
+        [Description("Past Broadcast")]
+        PASTBROADCAST
     }
 }

@@ -2,16 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Linq;
 using Tripwires.LiveStream.Interface.Lib;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace Tripwires.LiveStream.Interface
 {
@@ -58,7 +54,7 @@ namespace Tripwires.LiveStream.Interface
                 TwitchHandler test = new TwitchHandler(this.txtChannelName.Text);
                 try
                 {
-                    loadListBox(test.getVODS());
+                    loadListBox(test.GetVODS((int)nmrNumberOfVideos.Value, this.cmbVodType.Text));
                 }
                 catch (WebException webEx)
                 {
@@ -85,14 +81,51 @@ namespace Tripwires.LiveStream.Interface
             Vod selectedVod = (Vod)lstVods.SelectedItem;
             if (selectedVod != null)
             {
-                pcbThumbnail.LoadAsync(selectedVod.ThumbNails[0].Url);
-                pcbThumbnail.LoadCompleted += PcbThumbnail_LoadCompleted;
+                this.showResolutions(selectedVod);
+                loadImage(selectedVod);
             }
         }
 
+        private void showResolutions(Vod vod)
+        {
+            this.cmbResolutions.Items.Clear();
+            if (!string.IsNullOrEmpty(vod.Resolution.Source))
+            {
+                this.cmbResolutions.Items.Add("source");
+            }
+            if (!string.IsNullOrEmpty(vod.Resolution.High))
+            {
+                this.cmbResolutions.Items.Add("high");
+            }
+            if (!string.IsNullOrEmpty(vod.Resolution.Medium))
+            {
+                this.cmbResolutions.Items.Add("medium");
+            }
+            if (!string.IsNullOrEmpty(vod.Resolution.Low))
+            {
+                this.cmbResolutions.Items.Add("low");
+            }
+            if (!string.IsNullOrEmpty(vod.Resolution.Mobile))
+            {
+                this.cmbResolutions.Items.Add("mobile");
+            }
+            this.cmbResolutions.Update();
+        }
+
+        private void loadImage(Vod selectedVod)
+        {
+            pcbThumbnail.LoadAsync(selectedVod.ThumbNails[0].Url);
+            pcbThumbnail.LoadCompleted += PcbThumbnail_LoadCompleted;
+        }
+
+        /// <summary>
+        /// once the image is loaded, replace by a scaled version
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PcbThumbnail_LoadCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            //add code to scale thumbnail to correct dimmensions
+            pcbThumbnail.Image = new Bitmap((Bitmap)pcbThumbnail.Image, 160, 90);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -102,7 +135,7 @@ namespace Tripwires.LiveStream.Interface
 
         private void btnDownload_Click(object sender, EventArgs e)
         {
-            if (this.lstVods.SelectedItem != null)
+            if (this.lstVods.SelectedItem != null && this.cmbResolutions.Text != null)
             {
                 SaveFileDialog dialog = new SaveFileDialog();
                 dialog.Title = "Select the location where you want to save the file";
@@ -121,7 +154,7 @@ namespace Tripwires.LiveStream.Interface
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName =  "livestreamer";
             startInfo.UseShellExecute = true;
-            startInfo.Arguments = string.Format(@"""{0}"" source -o ""{1}""", (this.lstVods.SelectedItem as Vod).Url.Replace("http://www.",""), ((SaveFileDialog)sender).FileName);
+            startInfo.Arguments = string.Format(@"""{0}"" {1} -o ""{2}""", (this.lstVods.SelectedItem as Vod).Url.Replace("http://www.",""),this.cmbResolutions.Text, ((SaveFileDialog)sender).FileName);
             // need to figure out the correct path needed
             Process x = Process.Start(startInfo);
         }

@@ -58,6 +58,8 @@
     </Compile>
     <Compile Include="Lib\Channel.cs" />
     <Compile Include="Lib\Consts.cs" />
+    <Compile Include="Lib\PageLink.cs" />
+    <Compile Include="Lib\Resolution.cs" />
     <Compile Include="Lib\Thumb.cs" />
     <Compile Include="Lib\TwitchHandler.cs" />
     <Compile Include="Lib\Vod.cs" />

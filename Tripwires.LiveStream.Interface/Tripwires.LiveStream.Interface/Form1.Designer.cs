@@ -34,11 +34,15 @@
             this.btnConnect = new System.Windows.Forms.Button();
             this.lstVods = new System.Windows.Forms.ListBox();
             this.btnDownload = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbVodType = new System.Windows.Forms.ComboBox();
             this.lblVodType = new System.Windows.Forms.Label();
             this.pcbThumbnail = new System.Windows.Forms.PictureBox();
-            this.btnUpdate = new System.Windows.Forms.Button();
+            this.cmbResolutions = new System.Windows.Forms.ComboBox();
+            this.lblResolution = new System.Windows.Forms.Label();
+            this.lblLoad = new System.Windows.Forms.Label();
+            this.nmrNumberOfVideos = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.pcbThumbnail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmrNumberOfVideos)).BeginInit();
             this.SuspendLayout();
             // 
             // lblChannelName
@@ -72,14 +76,14 @@
             this.btnDownload.UseVisualStyleBackColor = true;
             this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
-            // comboBox1
+            // cmbVodType
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            resources.GetString("comboBox1.Items"),
-            resources.GetString("comboBox1.Items1")});
-            resources.ApplyResources(this.comboBox1, "comboBox1");
-            this.comboBox1.Name = "comboBox1";
+            this.cmbVodType.FormattingEnabled = true;
+            this.cmbVodType.Items.AddRange(new object[] {
+            resources.GetString("cmbVodType.Items"),
+            resources.GetString("cmbVodType.Items1")});
+            resources.ApplyResources(this.cmbVodType, "cmbVodType");
+            this.cmbVodType.Name = "cmbVodType";
             // 
             // lblVodType
             // 
@@ -92,21 +96,53 @@
             this.pcbThumbnail.Name = "pcbThumbnail";
             this.pcbThumbnail.TabStop = false;
             // 
-            // btnUpdate
+            // cmbResolutions
             // 
-            resources.ApplyResources(this.btnUpdate, "btnUpdate");
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.cmbResolutions.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbResolutions, "cmbResolutions");
+            this.cmbResolutions.Name = "cmbResolutions";
+            // 
+            // lblResolution
+            // 
+            resources.ApplyResources(this.lblResolution, "lblResolution");
+            this.lblResolution.Name = "lblResolution";
+            // 
+            // lblLoad
+            // 
+            resources.ApplyResources(this.lblLoad, "lblLoad");
+            this.lblLoad.Name = "lblLoad";
+            // 
+            // nmrNumberOfVideos
+            // 
+            this.nmrNumberOfVideos.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            resources.ApplyResources(this.nmrNumberOfVideos, "nmrNumberOfVideos");
+            this.nmrNumberOfVideos.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nmrNumberOfVideos.Name = "nmrNumberOfVideos";
+            this.nmrNumberOfVideos.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             // 
             // frmMain
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnUpdate);
+            this.Controls.Add(this.nmrNumberOfVideos);
+            this.Controls.Add(this.lblLoad);
+            this.Controls.Add(this.lblResolution);
+            this.Controls.Add(this.cmbResolutions);
             this.Controls.Add(this.pcbThumbnail);
             this.Controls.Add(this.lblVodType);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmbVodType);
             this.Controls.Add(this.btnDownload);
             this.Controls.Add(this.lstVods);
             this.Controls.Add(this.btnConnect);
@@ -115,6 +151,7 @@
             this.Name = "frmMain";
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pcbThumbnail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmrNumberOfVideos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -127,10 +164,13 @@
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.ListBox lstVods;
         private System.Windows.Forms.Button btnDownload;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbVodType;
         private System.Windows.Forms.Label lblVodType;
         private System.Windows.Forms.PictureBox pcbThumbnail;
-        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.ComboBox cmbResolutions;
+        private System.Windows.Forms.Label lblResolution;
+        private System.Windows.Forms.Label lblLoad;
+        private System.Windows.Forms.NumericUpDown nmrNumberOfVideos;
     }
 }
 
