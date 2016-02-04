@@ -154,7 +154,8 @@ namespace Tripwires.LiveStream.Interface
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName =  "livestreamer";
             startInfo.UseShellExecute = true;
-            startInfo.Arguments = string.Format(@"""{0}"" {1} -o ""{2}""", (this.lstVods.SelectedItem as Vod).Url.Replace("http://www.",""),this.cmbResolutions.Text, ((SaveFileDialog)sender).FileName);
+            string quality = (!string.IsNullOrEmpty(this.cmbResolutions.Text)) ? this.cmbResolutions.Text : "source";
+            startInfo.Arguments = string.Format(@"""{0}"" {1} -o ""{2}""", (this.lstVods.SelectedItem as Vod).Url.Replace("http://www.",""), quality, ((SaveFileDialog)sender).FileName);
             // need to figure out the correct path needed
             Process x = Process.Start(startInfo);
         }
