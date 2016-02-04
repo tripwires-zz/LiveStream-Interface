@@ -33,7 +33,7 @@ namespace Tripwires.LiveStream.Interface
             }
             else
             {
-                MessageBox.Show("Please Installa LiveStreamer before using this program. You might need to reinstall after the installation.", "LiveStreamer Missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please install livestreamer before using this program. You might need to reboot after the installation of livestreamer.", "LiveStreamer Missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
