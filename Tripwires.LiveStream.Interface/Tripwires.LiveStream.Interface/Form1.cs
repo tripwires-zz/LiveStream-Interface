@@ -8,6 +8,16 @@ using System.Windows.Forms;
 using Tripwires.LiveStream.Interface.Lib;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
+using Hudl.FFmpeg.Settings.BaseTypes;
+using Hudl.FFmpeg.Settings;
+using Hudl.FFmpeg.Command;
+using Hudl.FFmpeg.Resources.BaseTypes;
+using Hudl.FFmpeg.Sugar;
+using Hudl.FFmpeg.Resources;
+using Hudl.FFmpeg;
+using System.Reflection;
+using Hudl.FFmpeg.Enums;
 
 namespace Tripwires.LiveStream.Interface
 {
@@ -15,6 +25,8 @@ namespace Tripwires.LiveStream.Interface
     {
         private Vod[] vods;
         private string liveStreamerPath;
+        private string saveFileName;
+
         public frmMain()
         {
             InitializeComponent();
@@ -152,12 +164,43 @@ namespace Tripwires.LiveStream.Interface
         private void Dialog_FileOk(object sender, CancelEventArgs e)
         {
             ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName =  "livestreamer";
-            startInfo.UseShellExecute = true;
+            startInfo.FileName = "livestreamer";
+            //startInfo.UseShellExecute = true;
             string quality = (!string.IsNullOrEmpty(this.cmbResolutions.Text)) ? this.cmbResolutions.Text : "source";
-            startInfo.Arguments = string.Format(@"""{0}"" {1} -o ""{2}""", (this.lstVods.SelectedItem as Vod).Url.Replace("http://www.",""), quality, ((SaveFileDialog)sender).FileName);
+            this.saveFileName = ((SaveFileDialog)sender).FileName;
+            startInfo.Arguments = string.Format(@"""{0}"" {1} -o ""{2}""", (this.lstVods.SelectedItem as Vod).Url.Replace("http://www.", ""), quality, ((SaveFileDialog)sender).FileName);
             // need to figure out the correct path needed
-            Process x = Process.Start(startInfo);
+            Process liveStreamer = Process.Start(startInfo);
+            liveStreamer.EnableRaisingEvents = true;
+            liveStreamer.Exited += LiveStreamer_Exited;
+        }
+
+        private void LiveStreamer_Exited(object sender, EventArgs e)
+        {
+            var settings = SettingsCollection.ForOutput(
+              new CodecVideo(VideoCodecType.Libx264),
+              new CodecAudio(AudioCodecType.Libvo_AacEnc),
+              new BitRateVideo(3500),
+              new Hudl.FFmpeg.Settings.Size(1280, 720),
+              new OverwriteOutput());
+
+            var outputPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\";
+            var FFmpegPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\ffmpeg\\FFmpeg.exe";
+            var FFprobePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\ffmpeg\\FFprobe.exe";
+
+            ResourceManagement.CommandConfiguration = CommandConfiguration.Create(outputPath, FFmpegPath, FFprobePath);
+
+            //we need to create an instance of a command factory.   
+            var factory = CommandFactory.Create();
+
+            //staging all input video streams for concatenation, filtering, and mapping to output
+            factory.CreateOutputCommand()
+                   .WithInput<VideoStream>(this.saveFileName)
+                   .WithInput<AudioStream>(this.saveFileName)
+                   .MapTo<Mp4>(this.saveFileName + ".mp4", settings);
+
+            //the render command will start feeding the commands to FFmpeg
+            factory.Render();
         }
     }
 }
