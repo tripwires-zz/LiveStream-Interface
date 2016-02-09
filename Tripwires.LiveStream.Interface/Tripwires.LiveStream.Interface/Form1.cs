@@ -150,6 +150,8 @@ namespace Tripwires.LiveStream.Interface
             if (this.lstVods.SelectedItem != null && this.cmbResolutions.Text != null)
             {
                 SaveFileDialog dialog = new SaveFileDialog();
+                dialog.DefaultExt += ".ts";
+                dialog.AddExtension = true;
                 dialog.Title = "Select the location where you want to save the file";
                 dialog.FileOk += Dialog_FileOk;
                 dialog.ShowDialog();
@@ -177,30 +179,38 @@ namespace Tripwires.LiveStream.Interface
 
         private void LiveStreamer_Exited(object sender, EventArgs e)
         {
-            var settings = SettingsCollection.ForOutput(
-              new CodecVideo(VideoCodecType.Libx264),
-              new CodecAudio(AudioCodecType.Libvo_AacEnc),
-              new BitRateVideo(3500),
-              new Hudl.FFmpeg.Settings.Size(1280, 720),
-              new OverwriteOutput());
+            if (File.Exists(this.saveFileName))
+            {
+                MessageBox.Show("Video will start transcoding now.");
+                var settings = SettingsCollection.ForOutput(
+                  new CodecVideo(VideoCodecType.Libx264),
+                  new CodecAudio(AudioCodecType.Libvo_AacEnc),
+                  new BitRateVideo(3500),
+                  new Hudl.FFmpeg.Settings.Size(1280, 720),
+                  new OverwriteOutput());
 
-            var outputPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\";
-            var FFmpegPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\ffmpeg\\FFmpeg.exe";
-            var FFprobePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\ffmpeg\\FFprobe.exe";
+                var outputPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\";
+                var FFmpegPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\ffmpeg\\FFmpeg.exe";
+                var FFprobePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\ffmpeg\\FFprobe.exe";
 
-            ResourceManagement.CommandConfiguration = CommandConfiguration.Create(outputPath, FFmpegPath, FFprobePath);
+                ResourceManagement.CommandConfiguration = CommandConfiguration.Create(outputPath, FFmpegPath, FFprobePath);
 
-            //we need to create an instance of a command factory.   
-            var factory = CommandFactory.Create();
+                //we need to create an instance of a command factory.   
+                var factory = CommandFactory.Create();
 
-            //staging all input video streams for concatenation, filtering, and mapping to output
-            factory.CreateOutputCommand()
-                   .WithInput<VideoStream>(this.saveFileName)
-                   .WithInput<AudioStream>(this.saveFileName)
-                   .MapTo<Mp4>(this.saveFileName + ".mp4", settings);
-
-            //the render command will start feeding the commands to FFmpeg
-            factory.Render();
+                //staging all input video streams for concatenation, filtering, and mapping to output
+                factory.CreateOutputCommand()
+                       .WithInput<VideoStream>(this.saveFileName)
+                       .WithInput<AudioStream>(this.saveFileName)
+                       .MapTo<Mp4>(this.saveFileName + ".mp4", settings);
+                //the render command will start feeding the commands to FFmpeg
+                factory.Render();
+                MessageBox.Show("Video transcoding is finished!");
+            }
+            else
+            {
+                MessageBox.Show("Download failed for some reason!");
+            }
         }
     }
 }
