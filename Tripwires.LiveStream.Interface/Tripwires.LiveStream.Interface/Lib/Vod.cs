@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using Newtonsoft.Json;
 
 namespace Tripwires.LiveStream.Interface.Lib
@@ -84,6 +85,7 @@ namespace Tripwires.LiveStream.Interface.Lib
                 description = value;
             }
         }
+        [Browsable(false)]
         [JsonProperty("broadcast_id")]
         public string BroadcastId
         {
@@ -214,7 +216,7 @@ namespace Tripwires.LiveStream.Interface.Lib
                 isMuted = value;
             }
         }
-        [JsonProperty("")]
+        [JsonProperty("preview")]
         public Uri Preview
         {
             get
@@ -253,6 +255,7 @@ namespace Tripwires.LiveStream.Interface.Lib
                 url = value;
             }
         }
+        [Browsable(false)]
         [JsonProperty("resolutions")]
         public Resolution Resolution
         {

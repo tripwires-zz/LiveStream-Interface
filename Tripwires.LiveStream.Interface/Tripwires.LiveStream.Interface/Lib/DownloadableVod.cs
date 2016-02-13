@@ -153,6 +153,7 @@ namespace Tripwires.LiveStream.Interface.Lib
             this.ThumbNails = vod.ThumbNails;
             this.Title = vod.Title;
             this.Url = vod.Url;
+            this.VodType = vod.VodType;
         }
     }
 }

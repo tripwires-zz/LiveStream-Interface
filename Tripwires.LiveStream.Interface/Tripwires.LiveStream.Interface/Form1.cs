@@ -54,6 +54,7 @@ namespace Tripwires.LiveStream.Interface
             if (pathContainsLiveStreamer(path))
             {
                 this.liveStreamerPath = this.GetLiveStreamerPath(path);
+                this.DgQueue.DataSource = this.vodsToDownload;
             }
             else
             {
@@ -142,7 +143,7 @@ namespace Tripwires.LiveStream.Interface
 
         private void loadImage(Vod selectedVod)
         {
-            pcbThumbnail.LoadAsync(selectedVod.ThumbNails[0].Url);
+            pcbThumbnail.LoadAsync(selectedVod.Preview.AbsoluteUri);
             pcbThumbnail.LoadCompleted += PcbThumbnail_LoadCompleted;
         }
 
@@ -241,7 +242,15 @@ namespace Tripwires.LiveStream.Interface
         {
             if (this.lstVods.SelectedItem != null)
             {
-                this.VodsToDownload.Add(new DownloadableVod(this.lstVods.SelectedItem as Vod));
+                DownloadableVod selectedVod = new DownloadableVod(this.lstVods.SelectedItem as Vod);
+                FrameResolution resolution = new FrameResolution((Vod)selectedVod, this.cmbResolutions.Text);
+                selectedVod.Height = resolution.Height;
+                selectedVod.Width = resolution.Width;
+                selectedVod.Bitrate = 3500;
+                this.VodsToDownload.Add(selectedVod);
+                var source = new BindingSource(this.VodsToDownload, null);
+                this.DgQueue.DataSource = source;
+                this.DgQueue.Update();
             }
         }
     }
