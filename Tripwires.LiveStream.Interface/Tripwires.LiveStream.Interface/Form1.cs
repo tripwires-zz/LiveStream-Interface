@@ -26,6 +26,22 @@ namespace Tripwires.LiveStream.Interface
         private Vod[] vods;
         private string liveStreamerPath;
         private string saveFileName;
+        private List<DownloadableVod> vodsToDownload = new List<DownloadableVod>();
+        private Vod currentVod;
+        private string quality;
+
+        internal List<DownloadableVod> VodsToDownload
+        {
+            get
+            {
+                return vodsToDownload;
+            }
+
+            set
+            {
+                vodsToDownload = value;
+            }
+        }
 
         public frmMain()
         {
@@ -149,6 +165,8 @@ namespace Tripwires.LiveStream.Interface
         {
             if (this.lstVods.SelectedItem != null && this.cmbResolutions.Text != null)
             {
+                this.quality = this.cmbResolutions.Text;
+                this.currentVod = this.lstVods.SelectedItem as Vod;
                 SaveFileDialog dialog = new SaveFileDialog();
                 dialog.DefaultExt += ".ts";
                 dialog.AddExtension = true;
@@ -170,7 +188,7 @@ namespace Tripwires.LiveStream.Interface
             //startInfo.UseShellExecute = true;
             string quality = (!string.IsNullOrEmpty(this.cmbResolutions.Text)) ? this.cmbResolutions.Text : "source";
             this.saveFileName = ((SaveFileDialog)sender).FileName;
-            startInfo.Arguments = string.Format(@"""{0}"" {1} -o ""{2}""", (this.lstVods.SelectedItem as Vod).Url.Replace("http://www.", ""), quality, ((SaveFileDialog)sender).FileName);
+            startInfo.Arguments = string.Format(@"""{0}"" {1} -o ""{2}""", (this.currentVod).Url.Replace("http://www.", ""), quality, ((SaveFileDialog)sender).FileName);
             // need to figure out the correct path needed
             Process liveStreamer = Process.Start(startInfo);
             liveStreamer.EnableRaisingEvents = true;
@@ -182,11 +200,12 @@ namespace Tripwires.LiveStream.Interface
             if (File.Exists(this.saveFileName))
             {
                 MessageBox.Show("Video will start transcoding now.");
+                FrameResolution outputResolution = new FrameResolution(this.currentVod, this.quality);
                 var settings = SettingsCollection.ForOutput(
                   new CodecVideo(VideoCodecType.Libx264),
                   new CodecAudio(AudioCodecType.Libvo_AacEnc),
                   new BitRateVideo(3500),
-                  new Hudl.FFmpeg.Settings.Size(1280, 720),
+                  new Hudl.FFmpeg.Settings.Size(outputResolution.Width, outputResolution.Height),
                   new OverwriteOutput());
 
                 var outputPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\";
@@ -210,6 +229,19 @@ namespace Tripwires.LiveStream.Interface
             else
             {
                 MessageBox.Show("Download failed for some reason!");
+            }
+        }
+
+        private void cmbResolutions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddToQueue_Click(object sender, EventArgs e)
+        {
+            if (this.lstVods.SelectedItem != null)
+            {
+                this.VodsToDownload.Add(new DownloadableVod(this.lstVods.SelectedItem as Vod));
             }
         }
     }

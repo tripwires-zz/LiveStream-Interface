@@ -22,6 +22,9 @@ namespace Tripwires.LiveStream.Interface.Lib
         private string low;
         private string source;
 
+        /// <summary>
+        /// contains the resolution of the medium quality stream
+        /// </summary>
         [JsonProperty("medium")]
         public string Medium
         {
@@ -35,6 +38,9 @@ namespace Tripwires.LiveStream.Interface.Lib
                 medium = value;
             }
         }
+        /// <summary>
+        /// contains the resolution of the mobile quality stream
+        /// </summary>
         [JsonProperty("mobile")]
         public string Mobile
         {
@@ -48,6 +54,9 @@ namespace Tripwires.LiveStream.Interface.Lib
                 mobile = value;
             }
         }
+        /// <summary>
+        /// contains the resolution of the high quality stream
+        /// </summary>
         [JsonProperty("high")]
         public string High
         {
@@ -61,6 +70,9 @@ namespace Tripwires.LiveStream.Interface.Lib
                 high = value;
             }
         }
+        /// <summary>
+        /// contains the resolution of the low quality stream
+        /// </summary>
         [JsonProperty("low")]
         public string Low
         {
@@ -74,6 +86,9 @@ namespace Tripwires.LiveStream.Interface.Lib
                 low = value;
             }
         }
+        /// <summary>
+        /// contains the resolution of the chunked quality stream
+        /// </summary>
         [JsonProperty("chunked")]
         public string Source
         {

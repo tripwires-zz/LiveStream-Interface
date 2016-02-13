@@ -144,7 +144,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblChannelName.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>14</value>
   </data>
   <data name="txtChannelName.Location" type="System.Drawing.Point, System.Drawing">
     <value>97, 13</value>
@@ -165,7 +165,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtChannelName.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>13</value>
   </data>
   <data name="btnConnect.Location" type="System.Drawing.Point, System.Drawing">
     <value>597, 13</value>
@@ -189,13 +189,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnConnect.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>12</value>
   </data>
   <data name="lstVods.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 65</value>
   </data>
   <data name="lstVods.Size" type="System.Drawing.Size, System.Drawing">
-    <value>575, 355</value>
+    <value>575, 199</value>
   </data>
   <data name="lstVods.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -210,10 +210,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lstVods.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>11</value>
   </data>
   <data name="btnDownload.Location" type="System.Drawing.Point, System.Drawing">
-    <value>597, 142</value>
+    <value>595, 108</value>
   </data>
   <data name="btnDownload.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 23</value>
@@ -234,7 +234,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnDownload.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="cmbVodType.Items" xml:space="preserve">
     <value>Highlight</value>
@@ -264,7 +264,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmbVodType.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="lblVodType.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -291,10 +291,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblVodType.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="pcbThumbnail.Location" type="System.Drawing.Point, System.Drawing">
-    <value>598, 288</value>
+    <value>598, 174</value>
   </data>
   <data name="pcbThumbnail.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 90</value>
@@ -312,10 +312,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pcbThumbnail.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="cmbResolutions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>597, 115</value>
+    <value>597, 81</value>
   </data>
   <data name="cmbResolutions.Size" type="System.Drawing.Size, System.Drawing">
     <value>162, 21</value>
@@ -333,13 +333,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmbResolutions.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="lblResolution.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblResolution.Location" type="System.Drawing.Point, System.Drawing">
-    <value>598, 96</value>
+    <value>595, 65</value>
   </data>
   <data name="lblResolution.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 13</value>
@@ -360,7 +360,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblResolution.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="lblLoad.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -387,7 +387,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLoad.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="nmrNumberOfVideos.Location" type="System.Drawing.Point, System.Drawing">
     <value>306, 40</value>
@@ -408,6 +408,78 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;nmrNumberOfVideos.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="btnAddToQueue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>598, 138</value>
+  </data>
+  <data name="btnAddToQueue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 23</value>
+  </data>
+  <data name="btnAddToQueue.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="btnAddToQueue.Text" xml:space="preserve">
+    <value>Add to Queue</value>
+  </data>
+  <data name="&gt;&gt;btnAddToQueue.Name" xml:space="preserve">
+    <value>btnAddToQueue</value>
+  </data>
+  <data name="&gt;&gt;btnAddToQueue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnAddToQueue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnAddToQueue.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 271</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Queue</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="dataGridView1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 288</value>
+  </data>
+  <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>575, 150</value>
+  </data>
+  <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;dataGridView1.Name" xml:space="preserve">
+    <value>dataGridView1</value>
+  </data>
+  <data name="&gt;&gt;dataGridView1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridView1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;dataGridView1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -417,7 +489,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>774, 433</value>
+    <value>774, 443</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>LiveStream Twitch Interface</value>

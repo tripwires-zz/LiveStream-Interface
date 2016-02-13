@@ -76,6 +76,8 @@
     </Compile>
     <Compile Include="Lib\Channel.cs" />
     <Compile Include="Lib\Consts.cs" />
+    <Compile Include="Lib\DownloadableVod.cs" />
+    <Compile Include="Lib\FrameResolution.cs" />
     <Compile Include="Lib\PageLink.cs" />
     <Compile Include="Lib\Resolution.cs" />
     <Compile Include="Lib\Thumb.cs" />
@@ -110,7 +112,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="ffmpeg\ffmpeg.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ffmpeg\ffprobe.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

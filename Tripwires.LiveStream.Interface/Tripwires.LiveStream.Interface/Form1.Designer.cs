@@ -41,8 +41,12 @@
             this.lblResolution = new System.Windows.Forms.Label();
             this.lblLoad = new System.Windows.Forms.Label();
             this.nmrNumberOfVideos = new System.Windows.Forms.NumericUpDown();
+            this.btnAddToQueue = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.pcbThumbnail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmrNumberOfVideos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblChannelName
@@ -101,6 +105,7 @@
             this.cmbResolutions.FormattingEnabled = true;
             resources.ApplyResources(this.cmbResolutions, "cmbResolutions");
             this.cmbResolutions.Name = "cmbResolutions";
+            this.cmbResolutions.SelectedIndexChanged += new System.EventHandler(this.cmbResolutions_SelectedIndexChanged);
             // 
             // lblResolution
             // 
@@ -132,10 +137,34 @@
             0,
             0});
             // 
+            // btnAddToQueue
+            // 
+            resources.ApplyResources(this.btnAddToQueue, "btnAddToQueue");
+            this.btnAddToQueue.Name = "btnAddToQueue";
+            this.btnAddToQueue.UseVisualStyleBackColor = true;
+            this.btnAddToQueue.Click += new System.EventHandler(this.btnAddToQueue_Click);
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(this.dataGridView1, "dataGridView1");
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            // 
             // frmMain
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.btnAddToQueue);
             this.Controls.Add(this.nmrNumberOfVideos);
             this.Controls.Add(this.lblLoad);
             this.Controls.Add(this.lblResolution);
@@ -152,6 +181,7 @@
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pcbThumbnail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmrNumberOfVideos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -171,6 +201,9 @@
         private System.Windows.Forms.Label lblResolution;
         private System.Windows.Forms.Label lblLoad;
         private System.Windows.Forms.NumericUpDown nmrNumberOfVideos;
+        private System.Windows.Forms.Button btnAddToQueue;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 
